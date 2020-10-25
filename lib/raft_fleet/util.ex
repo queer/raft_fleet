@@ -15,9 +15,7 @@ defmodule RaftFleet.Util do
   defunp find_leader(name :: atom) :: nil | pid do
     [Node.self() | Node.list()]
     |> Enum.map(fn node -> try_status({name, node}) end)
-    |> IO.inspect(pretty: true)
     |> Enum.filter(&match?(%{leader: p} when is_pid(p), &1))
-    |> IO.inspect(pretty: true)
     |> case do
       [] -> nil
       ss -> Enum.max_by(ss, &(&1.current_term)).leader
