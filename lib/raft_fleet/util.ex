@@ -27,7 +27,6 @@ defmodule RaftFleet.Util do
       server
       |> IO.inspect(pretty: true)
       |> RaftedValue.status()
-      |> IO.inspect(pretty: true)
       |> Map.delete(:config) # `:config` is not important and thus removed here
     catch
       :exit, _ -> nil
