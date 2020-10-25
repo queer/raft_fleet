@@ -26,8 +26,11 @@ defmodule RaftFleet.Util do
 
   def try_status(server) do
     try do
-      RaftedValue.status(server)
+      server
+      |> IO.inspect(pretty: true)
+      |> RaftedValue.status(server)
       |> Map.delete(:config) # `:config` is not important and thus removed here
+      |> IO.inspect(pretty: true)
     catch
       :exit, _ -> nil
     end
